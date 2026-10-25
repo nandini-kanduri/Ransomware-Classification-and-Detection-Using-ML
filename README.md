@@ -1,46 +1,33 @@
 # Ransomware Classification and Detection Using Machine Learning Algorithms
 
-## Project Overview
-This project focuses on detecting and classifying ransomware using machine learning techniques to improve cybersecurity and identify malicious activities.
+An educational machine-learning pipeline for **binary ransomware-versus-benign classification** using labeled, tabular features. This is a **new reconstruction** inspired by the original college project presentation; it is not the recovered original source code.
 
-## Machine Learning Algorithms
+## Algorithms
 - Decision Tree
 - Random Forest
-- Naïve Bayes
+- Naïve Bayes (Gaussian)
 - Logistic Regression
-- Neural Network
+- Neural Network (MLP)
 
-## Methodology
-1. Data Collection and Preprocessing
-2. Feature Extraction and Selection
-3. Machine Learning Model Training
-4. Model Evaluation and Comparison
-5. Ransomware Classification
+## Requirements
+Python 3.10+ recommended. Install with:
 
-## Technologies
-- Python
-- Machine Learning
-- Data Preprocessing
-- Classification Algorithms
+```bash
+pip install -r requirements.txt
+```
 
-## Evaluation Metrics
-- Accuracy
-- Precision
-- Recall
-- F1-Score
-- F-beta Score
+## Dataset
+Supply your own **safe, labeled CSV of extracted features**, not live ransomware executables. The CSV must have a binary target column (default `label`) and feature columns. Example schema: `entropy,api_call_count,network_connections,label`. These are illustrative columns only, not a bundled dataset. Review and remove dataset-specific identifiers, target leakage, and sensitive information before training.
 
-## Project Results
-According to the project presentation, Random Forest achieved the best overall performance among the evaluated classifiers.
+## Run
+```bash
+python train.py --data dataset.csv --target label
+```
 
-## Project Presentation
-The project presentation is available in this repository as `RAMSOMEWARE PPT1.pptx`.
+The script performs an 80/20 stratified split, trains five models, prints classification reports and confusion matrices, and writes model files and a comparison CSV/PNG locally. Generated artifacts are excluded from Git by default. A holdout score is not proof of production detection effectiveness. Validate with separate samples and account for data leakage and class imbalance.
 
-## Future Enhancements
-- Real-time ransomware detection
-- Behavioral anomaly detection
-- Adaptive machine learning
-- Cloud-based threat monitoring
+## Original project presentation
+The original presentation is available separately in this GitHub repository (`RAMSOMEWARE PPT1.pptx`). It reports Random Forest as the strongest model in its experiments. **This reconstructed pipeline has not been run on the original dataset; no accuracy claims are made here.**
 
-## Note
-This repository currently contains the project presentation and documentation. The source code and dataset have not yet been uploaded.
+## Safety
+This project uses static datasets of features only. It does not execute ransomware or scan unknown binaries.
